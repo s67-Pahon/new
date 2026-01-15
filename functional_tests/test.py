@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
-
+import time
 
 from selenium.common.exceptions import WebDriverException
 FFoptions=Options()
@@ -77,7 +77,7 @@ class NewVisitorTest(LiveServerTestCase):
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith starts a new to-do list
         self.browser.get(self.live_server_url)
-        inputbox = self.browser.find_element(By.ID, "id_new_item")
+        inputbox = self.browser.find_element(By.ID, "")
         inputbox.send_keys("Buy peacock feathers")
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table("1: Buy peacock feathers")
