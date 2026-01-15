@@ -2,7 +2,7 @@
   <head>
     <title>To-Do lists</title>
   </head>
-  <body>
+<body>
     <h1>Your To-Do list</h1>
     <a href="https://krakenko03.pythonanywhere.com/about/">About me</a>
 
@@ -16,7 +16,9 @@
       <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
     {% endfor %}
   </table>
-        <h2>medium</h2>
+        <h2>medium
+       <body> 
+        </h2>
       <form method="POST">
       <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
       {% csrf_token %}
@@ -26,6 +28,7 @@
       <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
     {% endfor %}
   </table>
+
         <h2>low</h2>
       <form method="POST">
       <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
@@ -35,6 +38,6 @@
     {% for item in items %}
       <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
     {% endfor %}
-  </table
-  </body>
+    </table>
+</body>
 </html>
