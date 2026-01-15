@@ -3,14 +3,18 @@ from django.test import LiveServerTestCase  # เปลี่ยนการ imp
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import time
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
+
 
 from selenium.common.exceptions import WebDriverException
+FFoptions=Options()
+FFservice=Service(executable_path="/snap/bin/geckodriver")
 MAX_WAIT = 5  
 
 class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Firefox(options=FFoptions,service=FFservice) 
 
     def tearDown(self):
         self.browser.quit()

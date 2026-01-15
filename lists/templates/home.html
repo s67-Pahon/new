@@ -3,13 +3,16 @@
     <title>To-Do lists</title>
   </head>
   <body>
-  
-    <h1>Start a new To-Do list</h1>
-    <form method="POST" action="/lists/new">
+    <h1>Your To-Do list</h1>
+    <a href="https://krakenko03.pythonanywhere.com/about/">About me</a>
+    <form method="POST">
       <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
       {% csrf_token %}
     </form>
-
-  <a href="{% url 'about' %}">Go to about page</a>
+    <table id="id_list_table">
+    {% for item in items %}
+      <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+    {% endfor %}
+  </table>
 </body>
 </html>
