@@ -25,8 +25,10 @@ def view_list(request, list_id):
     our_list = List.objects.get(id=list_id)
 
     items = our_list.item_set.all()
+    is_sorted = False
 
     if request.GET.get("sort") == "priority":
+        is_sorted = True
         items = items.annotate(
             priority_rank=Case(
                 When(priority="H", then=Value(1)),
@@ -37,7 +39,16 @@ def view_list(request, list_id):
             )
         ).order_by("priority_rank", "id")
 
-    return render(request, "list.html", {"list": our_list, "items": items})
+    return render(
+        request,
+        "list.html",
+        {
+            "list": our_list,
+            "items": items,
+            "is_sorted": is_sorted,
+        },
+    )
+
 
 
 def add_item(request, list_id):

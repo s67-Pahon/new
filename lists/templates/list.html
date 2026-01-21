@@ -7,10 +7,15 @@
 
 <h1>Your List</h1>
 
-<a href="/lists/{{ list.id }}/?sort=priority">
-  <button type="button">Toggle Sort Priority</button>
-</a>
-
+{% if is_sorted %}
+  <a href="/lists/{{ list.id }}/">
+    <button type="button">Original order</button>
+  </a>
+{% else %}
+  <a href="/lists/{{ list.id }}/?sort=priority">
+    <button type="button">Sort by priority</button>
+  </a>
+{% endif %}
 
 
 <form method="POST" action="/lists/{{ list.id }}/add_item">
@@ -31,6 +36,7 @@
     <li>[{{ item.get_priority_display }}] {{ item.text }}</li>
   {% endfor %}
 </ul>
+
 
 
 
