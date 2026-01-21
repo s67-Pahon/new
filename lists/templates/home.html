@@ -5,10 +5,14 @@
   <body>
     <h1>Your To-Do list</h1>
 
-    <form method="POST" action="/lists/new">
-      {% csrf_token %}
-      <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
-    </form>
+<form method="POST" action="/lists/new">
+  {% csrf_token %}
+  <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
 
-  </body>
-</html>
+  <select name="priority">
+    <option value="H">High</option>
+    <option value="M" selected>Medium</option>
+    <option value="L">Low</option>
+  </select>
+</form>
+
