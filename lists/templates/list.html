@@ -7,6 +7,12 @@
 
 <h1>Your List</h1>
 
+<a href="/lists/{{ list.id }}/?sort=priority">
+  <button type="button">Toggle Sort Priority</button>
+</a>
+
+
+
 <form method="POST" action="/lists/{{ list.id }}/add_item">
   {% csrf_token %}
   <input name="item_text" placeholder="Enter a new item" />
@@ -20,9 +26,8 @@
   <button type="submit">Add item</button>
 </form>
 
-
 <ul>
-  {% for item in list.item_set.all %}
+  {% for item in items %}
     <li>[{{ item.get_priority_display }}] {{ item.text }}</li>
   {% endfor %}
 </ul>

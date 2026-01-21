@@ -1,6 +1,7 @@
 from django.shortcuts import redirect , render
 from django.http import HttpResponse
 from lists.models import Item , List
+from django.db.models import Case, When, Value, IntegerField
 
 # Create your views here.
 
@@ -22,7 +23,20 @@ def new_list(request):
 
 def view_list(request, list_id):
     our_list = List.objects.get(id=list_id)
-    items = our_list.item_set.order_by("priority")  # H, L, M order depends on letters
+
+    items = our_list.item_set.all()
+
+    if request.GET.get("sort") == "priority":
+        items = items.annotate(
+            priority_rank=Case(
+                When(priority="H", then=Value(1)),
+                When(priority="M", then=Value(2)),
+                When(priority="L", then=Value(3)),
+                default=Value(99),
+                output_field=IntegerField(),
+            )
+        ).order_by("priority_rank", "id")
+
     return render(request, "list.html", {"list": our_list, "items": items})
 
 
